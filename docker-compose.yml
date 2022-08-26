@@ -1,5 +1,16 @@
 version: "3.2"
 services:
+  rabbitmq:
+    container_name: rabbitmq
+    image: rabbitmq:3-management
+    ports:
+      - 5672:5672
+      - 15672:15672
+    volumes:
+      - /docker_conf/rabbitmq/data/:/var/lib/rabbitmq/
+    environment:
+      - RABBITMQ_DEFAULT_USER=admin
+      - RABBITMQ_DEFAULT_PASS=admin
   marketing:
     container_name: api-marketing-java
     build: ./marketing
@@ -15,6 +26,8 @@ services:
       - mongo-mkt
     environment:
       - RABBITMQ=rabbitmq
+    ports:
+      - 8086:8086
   mongo-mkt:
     image: mongo
     container_name: mongo-mkt
@@ -39,6 +52,10 @@ services:
   financeiro:
     container_name: api-financeiro-java
     build: ./financeiro
+    expose:
+      - 8090
+    ports:
+      - 8092:8090
     command:
       - sh ./entrypoint.sh
     volumes:
@@ -51,14 +68,4 @@ services:
     environment:
       - RABBITMQ=rabbitmq
 
-  rabbitmq:
-    container_name: rabbitmq
-    image: rabbitmq:3-management
-    ports:
-      - 5672:5672
-      - 15672:15672
-    volumes:
-      - /docker_conf/rabbitmq/data/:/var/lib/rabbitmq/
-    environment:
-      - RABBITMQ_DEFAULT_USER=admin
-      - RABBITMQ_DEFAULT_PASS=admin
+

@@ -1,0 +1,35 @@
+version: "3.2"
+services:
+  marketing:
+    container_name: api-marketing-java
+    image: marketing:latest
+    #image: marketing:latest
+#    command:
+#      - sh ./entrypoint.sh
+#    working_dir: /app
+    volumes:
+      - type: bind
+        source: ./marketing.sh
+        target: /app/entrypoint.sh
+    depends_on:
+      - rabbitmq
+        #financeiro:
+        #    image: financeiro:latest
+        #    container_name: api-financeiro-java
+#    command:
+#      - sh ./entrypoint.sh
+#    volumes:
+#      - ./financeiro:/app
+#      - type: bind
+#        source: ./financeiro.sh
+#        target: /app/entrypoint.sh
+#    working_dir: /app
+#    depends_on:
+#      - rabbitmq
+
+  rabbitmq:
+    container_name: rabbitmq
+    image: rabbitmq:3-management
+    ports:
+      - 5672:5672
+      - 15672:15672

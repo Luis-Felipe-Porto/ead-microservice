@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/.idea/ead-microsservices.iml" filepath="$PROJECT_DIR$/.idea/ead-microsservices.iml" />
+      <module fileurl="file://$PROJECT_DIR$/financeiro/financeiro.iml" filepath="$PROJECT_DIR$/financeiro/financeiro.iml" />
+      <module fileurl="file://$PROJECT_DIR$/marketing/marketing.iml" filepath="$PROJECT_DIR$/marketing/marketing.iml" />
+    </modules>
+  </component>
+</project>

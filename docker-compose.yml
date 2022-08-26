@@ -1,0 +1,64 @@
+version: "3.2"
+services:
+  marketing:
+    container_name: api-marketing-java
+    build: ./marketing
+    command:
+      - sh ./entrypoint.sh
+    working_dir: /app
+    volumes:
+      - type: bind
+        source: ./marketing.sh
+        target: /app/entrypoint.sh
+    depends_on:
+      - rabbitmq
+      - mongo-mkt
+    environment:
+      - RABBITMQ=rabbitmq
+  mongo-mkt:
+    image: mongo
+    container_name: mongo-mkt
+    ports:
+      - 27017:27017
+    volumes:
+      - /docker_conf/data/:/data
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: mkt-usuario
+      MONGO_INITDB_ROOT_PASSWORD: mkt-senha
+      MONGO_INITDB_DATABASE: mkt
+  mongo-express:
+    image: mongo-express
+    container_name: mongo-express
+    restart: always
+    ports:
+      - 8081:8081
+    environment:
+      - ME_CONFIG_MONGODB_ADMINUSERNAME=mkt-usuario
+      - ME_CONFIG_MONGODB_ADMINPASSWORD=mkt-senha
+      - ME_CONFIG_MONGODB_SERVER=mongo-mkt
+  financeiro:
+    container_name: api-financeiro-java
+    build: ./financeiro
+    command:
+      - sh ./entrypoint.sh
+    volumes:
+      - type: bind
+        source: ./financeiro.sh
+        target: /app/entrypoint.sh
+    working_dir: /app
+    depends_on:
+      - rabbitmq
+    environment:
+      - RABBITMQ=rabbitmq
+
+  rabbitmq:
+    container_name: rabbitmq
+    image: rabbitmq:3-management
+    ports:
+      - 5672:5672
+      - 15672:15672
+    volumes:
+      - /docker_conf/rabbitmq/data/:/var/lib/rabbitmq/
+    environment:
+      - RABBITMQ_DEFAULT_USER=admin
+      - RABBITMQ_DEFAULT_PASS=admin

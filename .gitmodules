@@ -1,2 +1,9 @@
 [submodule "academico"]
-	url = https://github.com/Luis-Felipe-Porto/academico
+    path = academico
+    url = https://github.com/Luis-Felipe-Porto/academico
+[submodule "financeiro"]
+    path = financeiro
+    url = https://github.com/Luis-Felipe-Porto/financeiro
+[submodule "marketing"]
+    path = marketing
+    url = https://github.com/Luis-Felipe-Porto/marketing

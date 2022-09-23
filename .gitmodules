@@ -8,8 +8,8 @@
     path = marketing
     url = https://github.com/Luis-Felipe-Porto/marketing
 [submodule "gateway-service"]
-    path = marketing
+    path = gateway-service
     url = https://github.com/Luis-Felipe-Porto/gateway-service
 [submodule "eureka-service"]
-    path = marketing
+    path = eureka-service
     url = https://github.com/Luis-Felipe-Porto/eureka-service

@@ -7,3 +7,6 @@
 [submodule "marketing"]
     path = marketing
     url = https://github.com/Luis-Felipe-Porto/marketing
+[submodule "gateway-service"]
+    path = marketing
+    url = https://github.com/Luis-Felipe-Porto/gateway-service
